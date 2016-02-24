@@ -19,18 +19,21 @@ angular.module('app', [])
       $scope.list = getList(res.data[0]);
       $scope.currentPage = 0;
       $scope.pages = new Array(parseInt($scope.list.length / 10));
+      $scope.currentPerson = -1;
     });
   })
   .directive('tree', function() {
     return {
       link: function(scope, elem, atrr) {
-        scope.click = function($event) {
+        scope.click = function($event, li) {
           $event.stopPropagation();
           if ($event.target.classList[0] === 'bckg-image') {
             $event.currentTarget.classList.toggle('hidden');
-            return true;
+            this.flag = !this.flag;
+          } else {
+            scope.currentPerson = scope.list.indexOf(li);
+            scope.currentPage = parseInt(scope.currentPerson / 10);
           }
-          return false;
         }
       },
       templateUrl: './tree.html'

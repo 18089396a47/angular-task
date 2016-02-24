@@ -1,7 +1,8 @@
 <div class="pages">
   <ul class="content">
-    <li ng-repeat="li in list" ng-show="$index>=currentPage*10 && $index<currentPage*10+10">
-      {{li.unit.name}} - {{li.unitOwner.name}}
+    <li ng-repeat="li in list" ng-if="$index>=currentPage*10 && $index<currentPage*10+10"
+      ng-class="{current: $index === currentPerson}">
+      {{li.unitOwner.name}} {{li.unitOwner.city}}
     </li>
   </ul>
   <ul class="navigation">

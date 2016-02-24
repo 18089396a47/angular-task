@@ -43,6 +43,10 @@ li.tree-element {
   max-width: 900px;
 }
 
+.current {
+  background: #ccc;
+}
+
 .navigation li {
   list-style: none;
   display: inline-block;
