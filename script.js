@@ -1,22 +1,28 @@
 angular.module('app', [])
   .controller('appCtrl', function($scope, $http) {
-    function getList(item, arr) {
+    function getList(item, arr, hashArr) {
       if (!arr) {
         arr = [];
       }
+      if (!hashArr) {
+        hashArr = [];
+      }
       if (item.unitOwner && item.unit) {
         arr.push(item);
+        hashArr.push(item.unitOwner.id);
         if (item.childUnits) {
           for (var i = 0; i < item.childUnits.length; i++) {
-            getList(item.childUnits[i], arr);
+            getList(item.childUnits[i], arr, hashArr);
           }
         }
       }
-      return arr;
+      return [arr, hashArr];
     }
     $http.get('./data.json').then(function(res) {
       $scope.tree = res.data;
       $scope.list = getList(res.data[0]);
+      $scope.hashArr = $scope.list[1];
+      $scope.list = $scope.list[0];
       $scope.currentPage = 0;
       $scope.pages = new Array(parseInt($scope.list.length / 10));
       $scope.currentPerson = -1;
@@ -29,9 +35,9 @@ angular.module('app', [])
           $event.stopPropagation();
           if ($event.target.classList[0] === 'bckg-image') {
             $event.currentTarget.classList.toggle('hidden');
-            this.flag = !this.flag;
+            li.flag = !li.flag;
           } else {
-            scope.currentPerson = scope.list.indexOf(li);
+            scope.currentPerson = scope.hashArr.indexOf(li.unitOwner.id);
             scope.currentPage = parseInt(scope.currentPerson / 10);
           }
         }

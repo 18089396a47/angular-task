@@ -10,8 +10,8 @@
     <ul ng-if="li.childUnits && li.unitOwner">
       <div class="bckg-image"></div>
       <span>{{li.unit.name}}</span> - {{li.unitOwner.name}}
-      <li ng-repeat="li in li.childUnits | filter:q as results" ng-if="li.unitOwner && $parent.flag" ng-include="'tree'"
-      ng-click="click($event,li)" class="tree-element hidden">
+      <li ng-repeat="li in li.childUnits | filter:q as results" ng-if="li.unitOwner && $parent.li.flag" ng-include="'tree'"
+      ng-click="click($event,li)" class="tree-element" ng-class="{hidden: !li.flag}">
       </li>
     </ul>
   </script>
