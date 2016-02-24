@@ -1,0 +1,15 @@
+<ul class="tree">
+  <li ng-repeat='li in tree' ng-include="'tree'" ng-if="li.unitOwner"
+    ng-click="click($event);flag=!flag" class="tree-element">
+    <span>{{li.unit.name}}</span> - {{li.unitOwner.name}}
+  </li>
+</ul>
+<script type="text/ng-template" id="tree">
+  <ul ng-if="li.childUnits && li.unitOwner">
+    <div class="bckg-image"></div>
+    <span>{{li.unit.name}}</span> - {{li.unitOwner.name}}
+    <li ng-repeat="li in li.childUnits" ng-if="li.unitOwner" ng-include="'tree'"
+    ng-show="!$parent.flag" ng-click="click($event);flag=!flag" class="tree-element">
+    </li>
+  </ul>
+</script>

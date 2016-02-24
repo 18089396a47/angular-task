@@ -1,0 +1,12 @@
+<div class="pages">
+  <ul class="content">
+    <li ng-repeat="li in list" ng-show="$index>=currentPage*10 && $index<currentPage*10+10">
+      {{li.unit.name}} - {{li.unitOwner.name}}
+    </li>
+  </ul>
+  <ul class="navigation">
+    <li ng-repeat="li in pages track by $index" ng-click="$parent.currentPage=$index">
+      <span>{{$index + 1}}</span>
+    </li>
+  </ul>
+</div>
