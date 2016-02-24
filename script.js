@@ -40,7 +40,7 @@ angular.module('app', [])
             scope.currentPerson = scope.hashArr.indexOf(li.unitOwner.id);
             scope.currentPage = parseInt(scope.currentPerson / 10);
           }
-        }
+        };
       },
       templateUrl: './tree.html'
     };
@@ -48,5 +48,5 @@ angular.module('app', [])
   .directive('pages', function() {
     return {
       templateUrl: './pages.html'
-    }
+    };
   });
